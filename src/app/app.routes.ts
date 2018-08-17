@@ -5,7 +5,7 @@ import { ConnectionsComponent } from './components/connections/connections.compo
 
 export const ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'station-board', component: StationBoardComponent },
+  { path: 'stationboard', component: StationBoardComponent },
   { path: 'connections', component: ConnectionsComponent },
   //{ path: 'connections/detail/:id', component: ConnectionDetailComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
