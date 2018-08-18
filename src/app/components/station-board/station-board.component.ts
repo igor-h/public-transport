@@ -48,6 +48,11 @@ export class StationBoardComponent implements OnInit {
       this.stationChange();
     }
 
+    blurStationChange(newVal: string){
+      this.stationSelected = newVal;
+      this.stationChange();
+    }
+
     stationChange(){
       this._stationService.getStationBoard(this.stationSelected,this.pageSelected)
       .subscribe( (data:any) => {

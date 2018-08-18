@@ -12,7 +12,7 @@
           <div class="form-group">
             <div class="input-group">
               <input id="stationHttpAutocompleteSelect" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="stationSelected"
-                (ngModelChange)="stationChange($event)" [ngbTypeahead]="search" placeholder="Search stations" />
+                (blur)="blurStationChange($event.target.value)" [ngbTypeahead]="search" placeholder="Search stations" />
               <i *ngIf="searching" class="fa fa-user-circle-o"></i>
             </div>
             <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
