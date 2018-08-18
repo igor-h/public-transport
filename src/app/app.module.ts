@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Rutas
 import { ROUTES } from './app.routes';
@@ -27,6 +28,7 @@ import { ConnectionsComponent } from './components/connections/connections.compo
     FormsModule,
     HttpModule,
     HttpClientModule,
+    NgbModule,
     RouterModule.forRoot(ROUTES, { useHash: false })
   ],
   providers: [],
