@@ -1,5 +1,4 @@
-import {Component, Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
 import { StationService } from '../../services/station.service';
@@ -10,18 +9,21 @@ import { StationService } from '../../services/station.service';
   templateUrl: './station-board.component.html',
   styles: [`.form-control { width: 300px; }`]
 })
-export class StationBoardComponent {
+export class StationBoardComponent implements OnInit {
 
-    stations:any;
-
-    constructor(private _stationService: StationService) {
-      console.log("constructor buscador");
-    }
-
-    model: any;
+    stationSelected: string;
     searching = false;
     searchFailed = false;
+    pagesList = [5, 15, 20];
+    pageSelected: number;
+    stationBoardList: any;
 
+    constructor(private _stationService: StationService) {
+    }
+
+    ngOnInit(){
+      this.pageSelected = this.pagesList[0];
+    }
 
     search = (text$: Observable<string>) =>
     text$.pipe(
@@ -39,13 +41,19 @@ export class StationBoardComponent {
       ),
       tap(() => this.searching = false)
     );
- 
-     buscar(stationName:string) {
-      this._stationService.getStations(stationName)
-       .subscribe( (data:any) => {
-           this.stations = data;
-           console.log(this.stations)
-         });
-     }
+
+
+    onPageChange(newPage: number){
+      this.pageSelected = newPage;
+      this.stationChange();
+    }
+
+    stationChange(){
+      this._stationService.getStationBoard(this.stationSelected,this.pageSelected)
+      .subscribe( (data:any) => {
+        this.stationBoardList = data;
+        console.log(this.stationBoardList)
+      });
+    }
 
 }

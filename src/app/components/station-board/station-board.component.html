@@ -9,24 +9,23 @@
         </div>
 
         <div class="col-6">
-            <div class="form-group">
-                <input id="stationHttpAutocompleteSelect" type="text" class="form-control" 
-                    [class.is-invalid]="searchFailed" [(ngModel)]="model" 
-                    [ngbTypeahead]="search" placeholder="Search stations" />
-                <span *ngIf="searching">searching...</span>
-                <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+          <div class="form-group">
+            <div class="input-group">
+              <input id="stationHttpAutocompleteSelect" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="stationSelected"
+                (ngModelChange)="stationChange($event)" [ngbTypeahead]="search" placeholder="Search stations" />
+              <i *ngIf="searching" class="fa fa-user-circle-o"></i>
             </div>
+            <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+          </div>
         </div>
 
         <div class="col-2">
           <label class="float-right mt-md-2" for="resultSelect">Result per page</label>
         </div>
         <div class="col-2">
-          <select class="custom-select" id="resultSelect">
-            <option selected value="5">5</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-          </select>
+            <select id="resultSelect" class="custom-select" [ngModel]="pageSelected" (ngModelChange)="onPageChange($event)">
+              <option [value]="page" *ngFor="let page of pagesList"> {{page}}</option>
+            </select>
         </div>
       </div>
 
@@ -40,23 +39,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Interlaken</td>
-            <td>SSB</td>
-            <td>S1</td>
-            <td>12:03</td>
-          </tr>
-          <tr>
-              <td>Olten</td>
-              <td>SSB</td>
-              <td>S3 173241</td>
-              <td>12:03</td>
-          </tr>
-          <tr>
-              <td>Biel/Bienne</td>
-              <td>SSB</td>
-              <td>IR2323</td>
-              <td>12:04</td>
+          <tr *ngFor="let board of stationBoardList">
+            <td> {{ board.to }} </td>
+            <td>{{ board.operator }}</td>
+            <td>{{ board.name }}</td>
+            <td>{{ board.passList[0].departure | date:'hh:mm'}}</td>
           </tr>
         </tbody>
       </table>

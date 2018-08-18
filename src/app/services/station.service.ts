@@ -28,8 +28,14 @@ export class StationService {
 
     return this.getQuery(`locations?query=${ stationName }`)
               .pipe( map( data => data['stations'] 
-                      .map(x => x.name ) ) );
+                      .map(x => x.name ) ) );  // map list of objects to list of strings
 
-    //return stations.map((x) => x.name);
   }
+
+
+  getStationBoard( stationName: string, limit:number){
+    return this.getQuery(`stationboard?station=${ stationName }&limit=${ limit }`)
+              .pipe( map( data => data['stationboard'] ) );
+  }
+  
 }
