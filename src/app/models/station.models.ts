@@ -1,5 +1,5 @@
 export interface Station {
-    id: number;
+    id?: number;
     name: string;
     score?: any;
     distance?: number;

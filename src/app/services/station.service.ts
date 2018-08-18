@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,9 +23,13 @@ export class StationService {
     return this.http.get(url, { headers });
   }
 
+  // return station names
   getStations( stationName: string ) {
 
     return this.getQuery(`locations?query=${ stationName }`)
-              .pipe( map( data => data['stations'] ));
+              .pipe( map( data => data['stations'] 
+                      .map(x => x.name ) ) );
+
+    //return stations.map((x) => x.name);
   }
 }
