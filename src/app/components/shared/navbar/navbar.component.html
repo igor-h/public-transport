@@ -33,7 +33,8 @@
                     Login
             </button>
 
-            <button (click)="logout()"
+            <span class="mr-1" *ngIf="authService.isAutentificated()">{{ authService.loggedUser?.fullName }}</span>
+            <button (click)="authService.logout()"
                     *ngIf="authService.isAutentificated()"
                     type="button"
                     class="btn btn-outline-light">
