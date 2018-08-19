@@ -1,7 +1,12 @@
-export interface User {
-    id: number;
-    username: string;
-    password: string;
-    fullName: string;
-    isAuthorized: boolean;
+export class User {
+
+    constructor(
+        public id: number,
+        public username: string,
+        public password: string,
+        public fullName: string,
+        public isAuthorized: boolean
+    ){
+    }
+    
 }

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { StationBoardComponent } from './components/station-board/station-board.component';
-import { ConnectionsComponent } from './components/connections/connections.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { StationBoardComponent } from './components/pages/station-board/station-board.component';
+import { ConnectionsComponent } from './components/pages/connections/connections.component';
 
 export const ROUTES: Routes = [
   { path: 'home', component: HomeComponent },

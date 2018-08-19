@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
-import { StationService } from '../../services/station.service';
+import { StationService } from '../../../services/station.service';
 
 
 @Component({

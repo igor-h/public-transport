@@ -12,9 +12,9 @@ import { ROUTES } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
-import { StationBoardComponent } from './components/station-board/station-board.component';
-import { ConnectionsComponent } from './components/connections/connections.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { StationBoardComponent } from './components/pages/station-board/station-board.component';
+import { ConnectionsComponent } from './components/pages/connections/connections.component';
 import { AuthService } from './services/auth.service';
 
 @NgModule({

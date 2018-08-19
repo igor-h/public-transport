@@ -19,7 +19,7 @@
                 <a class="nav-link" routerLink="stationboard">Station Board</a>
             </li>
 
-            <li class="nav-item" routerLinkActive="active">
+            <li class="nav-item" routerLinkActive="active" *ngIf="authService.isAutentificated()">
                 <a class="nav-link" routerLink="connections">Connections</a>
             </li>
 
@@ -27,9 +27,17 @@
 
         <span class="navbar-text">
             <button (click)="login()"
+                    *ngIf="!authService.isAutentificated()"
                     type="button"
-                    class="btn btn-outline-primary">
+                    class="btn btn-outline-light">
                     Login
+            </button>
+
+            <button (click)="logout()"
+                    *ngIf="authService.isAutentificated()"
+                    type="button"
+                    class="btn btn-outline-light">
+                    Logout
             </button>
 
         </span>
