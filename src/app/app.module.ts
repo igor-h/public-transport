@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // Rutas
 import { ROUTES } from './app.routes';
@@ -14,6 +15,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { StationBoardComponent } from './components/station-board/station-board.component';
 import { ConnectionsComponent } from './components/connections/connections.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -29,9 +31,10 @@ import { ConnectionsComponent } from './components/connections/connections.compo
     HttpModule,
     HttpClientModule,
     NgbModule,
+    NgxPaginationModule,
     RouterModule.forRoot(ROUTES, { useHash: false })
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

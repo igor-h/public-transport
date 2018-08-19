@@ -28,7 +28,7 @@
             </select>
         </div>
       </div>
-
+    <!--{{currentPage}} of {{stationBoardList.length / pageSelected}}-->
       <table class="table table-striped table-light">
         <thead class="thead-dark">
           <tr>
@@ -39,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let board of stationBoardList">
+          <tr *ngFor="let board of stationBoardList | paginate: {  itemsPerPage: pageSelected, currentPage: currentPage, totalItems: stationBoardList?.length  }">
             <td> {{ board.to }} </td>
             <td>{{ board.operator }}</td>
             <td>{{ board.name }}</td>
@@ -48,19 +48,18 @@
         </tbody>
       </table>
 
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center float-left">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
-          </li>
-        </ul>
+      <div *ngIf="stationBoardList">
+        <div class="float-left">
+            <button type="button" class="btn"
+            [ngClass]="(currentPage==1) ? 'btn-outline-dark disabled':'btn-outline-primary'"
+            (click)="pageChange( -1 )">&laquo; Previous</button>
+        </div>
 
-        <ul class="pagination justify-content-center float-right">
-          <li class="page-item">
-            <a class="page-link" href="#">Next &raquo;</a>
-          </li>
-        </ul>
-      </nav>
-
+        <div class="float-right">
+            <button type="button" class="btn"
+            [ngClass]="(currentPage==maxPage) ? 'btn-outline-dark disabled':'btn-outline-primary'"
+            (click)="pageChange( 1 )">Next &raquo;</button>
+        </div>
+      </div>
     </div>
   </div>

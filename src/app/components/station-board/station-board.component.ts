@@ -16,6 +16,8 @@ export class StationBoardComponent implements OnInit {
     searchFailed = false;
     pagesList = [5, 15, 20];
     pageSelected: number;
+    currentPage = 1;
+    maxPage: number;
     stationBoardList: any;
 
     constructor(private _stationService: StationService) {
@@ -46,19 +48,37 @@ export class StationBoardComponent implements OnInit {
     onPageChange(newPage: number){
       this.pageSelected = newPage;
       this.stationChange();
+      this.currentPage = 1;
     }
 
     blurStationChange(newVal: string){
       this.stationSelected = newVal;
       this.stationChange();
+      this.currentPage = 1;
     }
 
     stationChange(){
-      this._stationService.getStationBoard(this.stationSelected,this.pageSelected)
+      this._stationService.getStationBoard(this.stationSelected,50)
       .subscribe( (data:any) => {
         this.stationBoardList = data;
         console.log(this.stationBoardList)
+        this.currentPage = 1;
       });
+    }
+
+    pageChange( value:number ){
+        //itemsPerPage: pageSelected, currentPage: currentPage, totalItems: stationBoardList?.length
+        let minPage = 1;
+        this.maxPage = Math.ceil(this.stationBoardList.length / this.pageSelected);
+
+        if ( this.maxPage < (this.currentPage + value )){ 
+          return;
+        }
+        if (minPage > (this.currentPage + value) ){
+          return;
+        }else{
+          this.currentPage = this.currentPage + value;
+        }
     }
 
 }
