@@ -9,7 +9,7 @@ export class AuthService {
 
   public loggedUser: User;
   public _isAutentificated: boolean = false;
-  private validUser: User = new User(   1, "user", "123456", "Mr. Traveler",true  );
+  private validUser: User = new User( 1, "user", "123456", "Mr. Traveler" );
   
   constructor(private router: Router) { }
 
