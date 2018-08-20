@@ -9,22 +9,19 @@ import { TransportService } from '../../../services/transport.service';
 })
 export class ConnectionsComponent implements OnInit {
 
-  stationSelected: string;
+  departureSelected: string;
+  destinationSelected: string;
   searchingDeparture = false;
   searchingDestination = false;
   searchFailedDeparture = false;
   searchFailedDestination = false;
-  pagesList = [5, 15, 20];
-  pageSelected: number;
-  currentPage = 1;
-  maxPage: number;
-  stationBoardList: any;
+  connectionsList: any;
 
   constructor(private _transportService: TransportService) {
   }
 
   ngOnInit(){
-    this.pageSelected = this.pagesList[0];
+    
   }
 
   departure = (text$: Observable<string>) =>
@@ -61,43 +58,22 @@ export class ConnectionsComponent implements OnInit {
     tap(() => this.searchingDestination = false)
   );
 
-  onPageChange(newPage: number){
-    this.pageSelected = newPage;
-    this.onResetSearch();
+
+  blurDepartureChange(newVal: string){
+    this.departureSelected = newVal;
   }
 
-  blurStationChange(newVal: string){
-    this.stationSelected = newVal;
-    this.onResetSearch();
+  blurDestinationChange(newVal: string){
+    this.destinationSelected = newVal;
   }
 
-  onResetSearch(){
-    this.stationChange();
-    this.currentPage = 1;
-  }
 
-  stationChange(){
-    this._transportService.getStationBoard(this.stationSelected,50)
+  search(){
+    this._transportService.getConnections(this.departureSelected,this.destinationSelected)
     .subscribe( (data:any) => {
-      this.stationBoardList = data;
-      console.log(this.stationBoardList)
-      this.currentPage = 1;
+      this.connectionsList = data;
+      console.log(this.connectionsList)
     });
-  }
-
-  pageChange( value:number ){
-      //itemsPerPage: pageSelected, currentPage: currentPage, totalItems: stationBoardList?.length
-      let minPage = 1;
-      this.maxPage = Math.ceil(this.stationBoardList.length / this.pageSelected);
-
-      if ( this.maxPage < (this.currentPage + value )){ 
-        return;
-      }
-      if (minPage > (this.currentPage + value) ){
-        return;
-      }else{
-        this.currentPage = this.currentPage + value;
-      }
   }
 
 }

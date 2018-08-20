@@ -40,7 +40,7 @@ export class TransportService {
   }
 
   getConnections(stationName1: string,stationName2: string, date?: string, time?:string ){
-    if(!date && !time){
+    if(date && time){
       return this.getQuery(`connections?from=${ stationName1 }&to=${ stationName2 }&date=${ date }&time=${ time }`)
                 .pipe( map( data => data['connections'] ) );
     }
