@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
-import { StationService } from '../../../services/station.service';
+import { TransportService } from '../../../services/transport.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class StationBoardComponent implements OnInit {
     maxPage: number;
     stationBoardList: any;
 
-    constructor(private _stationService: StationService) {
+    constructor(private _transportService: TransportService) {
     }
 
     ngOnInit(){
@@ -33,7 +33,7 @@ export class StationBoardComponent implements OnInit {
       distinctUntilChanged(),
       tap(() => this.searching = true),
       switchMap(stationName =>
-        this._stationService.getStations(stationName).pipe(
+        this._transportService.getStations(stationName).pipe(
           tap(() => this.searchFailed = false),
           catchError(() => {
             this.searchFailed = true;
@@ -47,18 +47,21 @@ export class StationBoardComponent implements OnInit {
 
     onPageChange(newPage: number){
       this.pageSelected = newPage;
-      this.stationChange();
-      this.currentPage = 1;
+      this.onResetSearch();
     }
 
     blurStationChange(newVal: string){
       this.stationSelected = newVal;
+      this.onResetSearch();
+    }
+
+    onResetSearch(){
       this.stationChange();
       this.currentPage = 1;
     }
 
     stationChange(){
-      this._stationService.getStationBoard(this.stationSelected,50)
+      this._transportService.getStationBoard(this.stationSelected,50)
       .subscribe( (data:any) => {
         this.stationBoardList = data;
         console.log(this.stationBoardList)
