@@ -7,7 +7,10 @@ export const ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'stationboard', component: StationBoardComponent },
   { path: 'connections', component: ConnectionsComponent },
-  //{ path: 'connections/detail/:id', component: ConnectionDetailComponent },
+  {
+    path: 'connections/:departureParam/:destinationParam',
+    component: ConnectionsComponent
+  },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];

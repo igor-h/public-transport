@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
 import { TransportService } from '../../../services/transport.service';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +22,9 @@ export class StationBoardComponent implements OnInit {
     maxPage: number;
     stationBoardList: any;
 
-    constructor(private _transportService: TransportService) {
+    constructor(private _transportService: TransportService,
+                private _authService: AuthService,
+                private router: Router) {
     }
 
     ngOnInit(){
@@ -82,6 +86,15 @@ export class StationBoardComponent implements OnInit {
         }else{
           this.currentPage = this.currentPage + value;
         }
+    }
+
+    openConnection( destinationParam: string ){
+      //this.router.navigate( ['/connections/departure/', { }] );
+      //['../sibling', { id: crisis.id, foo: 'foo' }]
+      //{ path: 'connections/departure/:departureParam/destination/:destinationParam', component: ConnectionsComponent },
+
+      this.router.navigate(['./connections',   this.stationSelected, destinationParam  ]);
+
     }
 
 }

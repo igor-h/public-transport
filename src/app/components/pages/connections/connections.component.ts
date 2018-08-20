@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
 import { TransportService } from '../../../services/transport.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-connections',
@@ -17,7 +18,15 @@ export class ConnectionsComponent implements OnInit {
   searchFailedDestination = false;
   connectionsList: any;
 
-  constructor(private _transportService: TransportService) {
+  constructor(private _transportService: TransportService,
+              private activatedRoute:ActivatedRoute) {
+    this.activatedRoute.params.subscribe( params =>{
+      console.log(params);
+      this.departureSelected = params.departureParam;
+      this.destinationSelected = params.destinationParam;
+      
+      this.search();
+    })
   }
 
   ngOnInit(){
@@ -35,7 +44,6 @@ export class ConnectionsComponent implements OnInit {
         catchError(() => {
           this.searchFailedDeparture = true;
           return of([]);
-          //return of([]).map((result) => el.name);
         }))
     ),
     tap(() => this.searchingDeparture = false)
@@ -52,7 +60,6 @@ export class ConnectionsComponent implements OnInit {
         catchError(() => {
           this.searchFailedDestination = true;
           return of([]);
-          //return of([]).map((result) => el.name);
         }))
     ),
     tap(() => this.searchingDestination = false)
