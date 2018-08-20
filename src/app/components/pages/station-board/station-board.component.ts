@@ -89,12 +89,7 @@ export class StationBoardComponent implements OnInit {
     }
 
     openConnection( destinationParam: string ){
-      //this.router.navigate( ['/connections/departure/', { }] );
-      //['../sibling', { id: crisis.id, foo: 'foo' }]
-      //{ path: 'connections/departure/:departureParam/destination/:destinationParam', component: ConnectionsComponent },
-
       this.router.navigate(['./connections',   this.stationSelected, destinationParam  ]);
-
     }
 
 }
