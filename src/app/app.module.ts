@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DatePipe } from '@angular/common';
 
 // Rutas
 import { ROUTES } from './app.routes';
@@ -35,7 +36,7 @@ import { AuthService } from './services/auth.service';
     NgxPaginationModule,
     RouterModule.forRoot(ROUTES, { useHash: false })
   ],
-  providers: [AuthService],
+  providers: [AuthService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

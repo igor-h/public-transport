@@ -10,12 +10,12 @@ import { map } from 'rxjs/operators';
 export class TransportService {
 
   constructor(private http: HttpClient){ 
-    console.log('Station Service works!');
+    console.log('Transport Service works!');
   }
 
   getQuery( query: string ) {
 
-    const url = `http://transport.opendata.ch/v1/${ query }`;
+    const url = `https://transport.opendata.ch/v1/${ query }`;
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'

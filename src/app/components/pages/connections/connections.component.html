@@ -12,9 +12,13 @@
           <div class="col-8 float-left">
             <div class="form-group">
               <div class="input-group">
-                <input id="departureAutocompleteSelect" type="text" class="form-control" [class.is-invalid]="searchFailedDeparture" [(ngModel)]="departureSelected"
-                  (blur)="blurDepartureChange($event.target.value)" [ngbTypeahead]="departure" name="departure" placeholder="Enter departure"
-                  required />
+                <input id="departureAutocompleteSelect" type="text" class="form-control is-invalid" [class.is-invalid]="searchFailedDeparture"
+                  [(ngModel)]="departureSelected" (blur)="blurDepartureChange($event.target.value)" [ngbTypeahead]="departure"
+                  name="departure" placeholder="Enter departure" required />
+                <div class="invalid-feedback">
+                  Please choose a Departure.
+                </div>
+
                 <i *ngIf="searchingDeparture" class="fa fa-user-circle-o"></i>
               </div>
               <div class="invalid-feedback" *ngIf="searchFailedDeparture">Sorry, suggestions could not be loaded.</div>
@@ -33,6 +37,9 @@
                 <input id="destinationAutocompleteSelect" type="text" class="form-control" [class.is-invalid]="searchFailedDestination" [(ngModel)]="destinationSelected"
                   (blur)="blurDestinationChange($event.target.value)" [ngbTypeahead]="destination" name="destination" placeholder="Enter destination"
                   required />
+                  <div class="invalid-feedback">
+                      Please choose a Destination.
+                  </div>
                 <i *ngIf="searchingDestination" class="fa fa-user-circle-o"></i>
               </div>
               <div class="invalid-feedback" *ngIf="searchFailedDestination">Sorry, suggestions could not be loaded.</div>
@@ -47,9 +54,18 @@
             <label class="float-right mt-md-2" for="dateTimeTextBox">Date and time</label>
           </div>
           <div class="col-8 float-left">
-            <div class="form-group">
-              <div class="input-group">
-                <input id="dateTimeTextBox" type="datetime-local" class="form-control" [(ngModel)]="dateTimeText" name="datetime" placeholder="Enter date " />
+            <div class="form-group has-feedback">
+              <div class="input-group has-feedback">
+                <input id="dateTimeTextBox" type="datetime-local" class="form-control" [ngClass]="{ 'is-invalid': invalidDateTime }" 
+                      [(ngModel)]="dateTimeText" name="datetime" placeholder="Enter date" />
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="form-control-feedback fa fa-calendar"></i>
+                  </div>
+                </div>
+                <div class="invalid-feedback">
+                    Please provide a valid date and time.
+                  </div>
               </div>
             </div>
           </div>
@@ -64,7 +80,10 @@
           <div class="col-1"></div>
         </div>
       </form>
-
+      <div *ngIf="isSearching" class="row h-100 justify-content-center align-items-center mb-1">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
       <div *ngIf="connectionsList?.length > 0">
         <table class="table table-striped table-light">
           <thead class="thead-dark">

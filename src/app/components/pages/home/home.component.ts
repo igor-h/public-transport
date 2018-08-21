@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   usernameInput: string;
   passwordInput: string;
 
-  constructor(private _authService: AuthService,
+  constructor(public _authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
