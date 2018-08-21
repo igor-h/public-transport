@@ -1,12 +1,85 @@
-<div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <p>Hello, {{item | json }}!</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+<div class="animated fadeIn fast">
+
+  <div class="modal-header">
+    <h4 class="modal-title">Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="ml-5">
+      <div class="row mt-2">
+        <div class="col-2">
+          <label>Origin:</label>
+        </div>
+
+        <div class="col-10 float-left">
+          <label>{{ connectionItem.from.station.name }}</label>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-2">
+          <label>Destination:</label>
+        </div>
+
+        <div class="col-10 float-left">
+          <label>{{ connectionItem.to.station.name }}</label>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-2">
+          <label>Total time:</label>
+        </div>
+
+        <div class="col-10 float-left">
+          <label>{{ connectionItem.duration | customTime }}</label>          
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-2">
+          <label><i>Journey details:</i></label>
+        </div>
+        <div class="col-10 float-left">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="connectionItem.sections?.length > 0" class="table-responsive mt-3">
+      <table class="table table-striped table-light">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Origin</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Departure</th>
+            <th scope="col">Arrival</th>
+            <th scope="col">Transport</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let section of connectionItem.sections">
+            <td>{{ section.departure.station.name }}</td>
+            <td>{{ section.arrival.station.name }}</td>
+            <td>{{ section.departure.departure | date:'HH:mm' }}</td>
+            <td>{{ section.arrival.arrival | date:'HH:mm' }}</td>
+            <td>
+              <div *ngIf="section.journey">
+                {{ section.journey.name }}
+              </div>
+              <div *ngIf="section.walk">
+                Walk <span class="badge badge-primary">{{ section.walk.duration/60 }} min.</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="row mb-3 ml-1">
+    <div class="col-12">
+      <button type="button" class="btn btn-danger float-left" (click)="activeModal.close()">
+        < Back </button>
+    </div>
+  </div>
 </div>

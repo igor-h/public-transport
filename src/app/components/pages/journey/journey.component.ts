@@ -8,7 +8,7 @@ import {  NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class JourneyComponent {
 
-  @Input() item;
+  @Input() connectionItem;
 
   constructor(public activeModal: NgbActiveModal) {}
 

@@ -37,9 +37,9 @@
                 <input id="destinationAutocompleteSelect" type="text" class="form-control" [class.is-invalid]="searchFailedDestination" [(ngModel)]="destinationSelected"
                   (blur)="blurDestinationChange($event.target.value)" [ngbTypeahead]="destination" name="destination" placeholder="Enter destination"
                   required />
-                  <div class="invalid-feedback">
-                      Please choose a Destination.
-                  </div>
+                <div class="invalid-feedback">
+                  Please choose a Destination.
+                </div>
                 <i *ngIf="searchingDestination" class="fa fa-user-circle-o"></i>
               </div>
               <div class="invalid-feedback" *ngIf="searchFailedDestination">Sorry, suggestions could not be loaded.</div>
@@ -56,16 +56,16 @@
           <div class="col-8 float-left">
             <div class="form-group has-feedback">
               <div class="input-group has-feedback">
-                <input id="dateTimeTextBox" type="datetime-local" class="form-control" [ngClass]="{ 'is-invalid': invalidDateTime }" 
-                      [(ngModel)]="dateTimeText" name="datetime" placeholder="Enter date" />
+                <input id="dateTimeTextBox" type="datetime-local" class="form-control" [ngClass]="{ 'is-invalid': invalidDateTime }" [(ngModel)]="dateTimeText"
+                  name="datetime" placeholder="Enter date" />
                 <div class="input-group-prepend">
                   <div class="input-group-text">
                     <i class="form-control-feedback fa fa-calendar"></i>
                   </div>
                 </div>
                 <div class="invalid-feedback">
-                    Please provide a valid date and time.
-                  </div>
+                  Please provide a valid date and time.
+                </div>
               </div>
             </div>
           </div>
@@ -99,10 +99,12 @@
             <tr *ngFor="let connection of connectionsList">
               <td>{{ connection.sections[0].departure.departure | date:'HH:mm' }}</td>
               <td>{{ connection.sections[0].arrival.arrival | date:'HH:mm'}}</td>
-              <td>{{ connection.duration }}</td>
+              <td>{{ connection.duration | customTime }}</td>
               <td>
-                <h3 *ngIf="connection.sections?.length <= 1" data-toggle="tooltip" data-placement="top" title="{{ connection.sections.length }} ">
-                  <span class="badge badge-pill badge-success">&nbsp;</span>
+                <h3 *ngIf="connection.sections?.length <= 1">
+                  <a class="badge badge-pill badge-success" data-toggle="tooltip" data-placement="top" title="{{ connection.sections.length }} ">
+                    &nbsp;
+                  </a>
                 </h3>
 
                 <h3 *ngIf="connection.sections?.length >= 2 && connection.sections?.length <= 4" data-toggle="tooltip" data-placement="top"
@@ -118,11 +120,10 @@
                 </h3>
               </td>
               <td>
-                  <button type="button" class="btn btn-outline-success"
-                    (click)="open(connection)">
-                    Open &nbsp;&nbsp;<i class="fas fa-external-link-alt"></i>
-                  </button>
-                
+                <button type="button" class="btn btn-outline-success" (click)="open(connection)">
+                  Open &nbsp;&nbsp;<i class="fas fa-external-link-alt"></i>
+                </button>
+
               </td>
             </tr>
           </tbody>
@@ -130,3 +131,4 @@
       </div>
     </div>
   </div>
+</div>

@@ -46,7 +46,7 @@ export class ConnectionsComponent  {
 
   open(item:any) {
     const modalRef = this.modalService.open(JourneyComponent, { size: 'lg' });
-    modalRef.componentInstance.item = item;
+    modalRef.componentInstance.connectionItem = item;
   }
 
 
