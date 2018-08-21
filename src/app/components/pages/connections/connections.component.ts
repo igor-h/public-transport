@@ -1,15 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
 import { TransportService } from '../../../services/transport.service';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { JourneyComponent } from '../journey/journey.component';
 
 @Component({
   selector: 'app-connections',
   templateUrl: './connections.component.html'
 })
-export class ConnectionsComponent implements OnInit {
+export class ConnectionsComponent  {
 
   departureSelected: string;
   destinationSelected: string;
@@ -24,8 +26,9 @@ export class ConnectionsComponent implements OnInit {
 
 
   constructor(private _transportService: TransportService,
-    private activatedRoute: ActivatedRoute,
-    private datePipe: DatePipe) {
+              private activatedRoute: ActivatedRoute,
+              private datePipe: DatePipe,
+              private modalService: NgbModal) {
     this.activatedRoute.params.subscribe(params => {
       console.log(params);
 
@@ -41,9 +44,11 @@ export class ConnectionsComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-
+  open(item:any) {
+    const modalRef = this.modalService.open(JourneyComponent, { size: 'lg' });
+    modalRef.componentInstance.item = item;
   }
+
 
   departure = (text$: Observable<string>) =>
     text$.pipe(

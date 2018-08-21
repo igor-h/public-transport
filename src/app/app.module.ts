@@ -17,6 +17,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { StationBoardComponent } from './components/pages/station-board/station-board.component';
 import { ConnectionsComponent } from './components/pages/connections/connections.component';
 import { AuthService } from './services/auth.service';
+import { JourneyComponent } from './components/pages/journey/journey.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,11 @@ import { AuthService } from './services/auth.service';
     NavbarComponent,
     HomeComponent,
     StationBoardComponent,
-    ConnectionsComponent
+    ConnectionsComponent,
+    JourneyComponent
   ],
+  entryComponents: [JourneyComponent],
+  exports: [JourneyComponent],
   imports: [
     BrowserModule,
     FormsModule,

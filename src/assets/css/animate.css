@@ -25,3 +25,11 @@
 .fadeIn {
   animation-name: fadeIn;
 }
+
+/* custom width */
+@media (min-width: 992px)
+{
+  .modal-lg {
+      max-width: 80% !important;
+  }
+}
