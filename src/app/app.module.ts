@@ -18,6 +18,7 @@ import { DatePipe } from '@angular/common';
 
 // Services
 import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -49,7 +50,7 @@ import { JourneyComponent } from './components/pages/journey/journey.component';
     NgxPaginationModule,
     RouterModule.forRoot(ROUTES, { useHash: false })
   ],
-  providers: [AuthService, DatePipe],
+  providers: [AuthService,AuthGuardService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

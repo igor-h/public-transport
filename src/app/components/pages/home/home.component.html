@@ -12,26 +12,48 @@
         <!-- if is not autentificated-->
         <div *ngIf="!_authService.isAutentificated()">
           <form ngNativeValidate [formGroup]="loginForm" (ngSubmit)="login()">
-            <div class="form-group">
-              <label for="inputLogin">Login</label>
-              <input type="text" formControlName="username" name="username" [(ngModel)]="usernameInput" required 
-                class="form-control" id="inputLogin" aria-describedby="loginHelp" placeholder="Enter login">
-            </div>
-            <div class="form-group">
-              <label for="inputPassword">Password</label>
-              <input type="password" formControlName="password" name="password" [(ngModel)]="passwordInput" required 
-              class="form-control" id="inputPassword" placeholder="Enter password">
-            </div>
+            <div class="col-12">
 
+              <div class="row">
+                <div class="col-2">
+                  <label for="inputLogin">Login</label>
+                </div>
+                <div class="col-10">
 
-            <div *ngIf="loginForm.errors?.invalidCredentials && !loginForm.pristine && formSended" class="alert alert-danger" role="alert">
-              Invalid Credentials
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="UsernameInputPretend"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input type="text" id="UsernameInput" formControlName="username" name="username" [(ngModel)]="usernameInput" required class="form-control"
+                      id="inputLogin" aria-describedby="UsernameInputPretend" placeholder="Enter login">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-2">
+                  <label for="inputPassword" class="mr-5">Password</label>
+                </div>
+
+                <div class="col-10">
+
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="passwordNameInputPretend"><i class="fas fa-key"></i></span>
+                    </div>
+                    <input type="password" formControlName="password" name="password" [(ngModel)]="passwordInput" required class="form-control"
+                      id="inputPassword" placeholder="Enter password" aria-describedby="passwordNameInputPretend">
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="loginForm.errors?.invalidCredentials && !loginForm.pristine && formSended" class="alert alert-danger" role="alert">
+                Invalid Credentials
+              </div>
+
+              <div class="float-right mt-3">
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
             </div>
-
-            <div class="float-right">
-              <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-
           </form>
         </div>
 
@@ -40,11 +62,9 @@
           <hr class="my-4">
           <h5>Welcome: {{ _authService.loggedUser?.fullName }}</h5>
 
-          <button type="button" class="btn btn-danger mt-3 float-right"
-              *ngIf="_authService.isAutentificated()"
-              (click)="_authService.logout()">Logout</button>
+          <button type="button" class="btn btn-danger mt-3 float-right" *ngIf="_authService.isAutentificated()" (click)="_authService.logout()">Logout</button>
 
-        </div>  
+        </div>
       </div>
     </div>
   </div>
